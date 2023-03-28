@@ -833,12 +833,12 @@
 //
 // Multi-Z steppers
 //
-#ifdef Z2_DRIVER_TYPE
+#ifdef Z2_DRIVER_TYPE //config:CHANGED
   //#define INVERT_Z2_VS_Z_DIR        // Z2 direction signal is the opposite of Z
 
-  //#define Z_MULTI_ENDSTOPS          // Other Z axes have their own endstops
+  #define Z_MULTI_ENDSTOPS //config:CHANGED          // Other Z axes have their own endstops
   #if ENABLED(Z_MULTI_ENDSTOPS)
-    #define Z2_USE_ENDSTOP   _XMAX_   // Z2 endstop board plug. Don't forget to enable USE_*_PLUG.
+    #define Z2_USE_ENDSTOP   _ZMAX_   // Z2 endstop board plug. Don't forget to enable USE_*_PLUG.
     #define Z2_ENDSTOP_ADJUSTMENT 0   // Z2 offset relative to Y endstop
   #endif
   #ifdef Z3_DRIVER_TYPE
@@ -1565,17 +1565,17 @@
    * an option on the LCD screen to continue the print from the last-known
    * point in the file.
    */
-  //#define POWER_LOSS_RECOVERY
+  //#define POWER_LOSS_RECOVERY  //config:CHANGED
   #if ENABLED(POWER_LOSS_RECOVERY)
-    #define PLR_ENABLED_DEFAULT   false // Power Loss Recovery enabled by default. (Set with 'M413 Sn' & M500)
-    //#define BACKUP_POWER_SUPPLY       // Backup power / UPS to move the steppers on power loss
-    //#define POWER_LOSS_ZRAISE       2 // (mm) Z axis raise on resume (on power loss with UPS)
-    //#define POWER_LOSS_PIN         44 // Pin to detect power loss. Set to -1 to disable default pin on boards without module.
-    //#define POWER_LOSS_STATE     HIGH // State of pin indicating power loss
-    //#define POWER_LOSS_PULLUP         // Set pullup / pulldown as appropriate for your sensor
+    #define PLR_ENABLED_DEFAULT   true // Power Loss Recovery enabled by default. (Set with 'M413 Sn' & M500)
+    #define BACKUP_POWER_SUPPLY       // Backup power / UPS to move the steppers on power loss
+    #define POWER_LOSS_ZRAISE       2 // (mm) Z axis raise on resume (on power loss with UPS)
+    #define POWER_LOSS_PIN         -1 // Pin to detect power loss. Set to -1 to disable default pin on boards without module.
+    #define POWER_LOSS_STATE     HIGH // State of pin indicating power loss
+    #define POWER_LOSS_PULLUP         // Set pullup / pulldown as appropriate for your sensor
     //#define POWER_LOSS_PULLDOWN
-    //#define POWER_LOSS_PURGE_LEN   20 // (mm) Length of filament to purge on resume
-    //#define POWER_LOSS_RETRACT_LEN 10 // (mm) Length of filament to retract on fail. Requires backup power.
+    #define POWER_LOSS_PURGE_LEN   20 // (mm) Length of filament to purge on resume
+    #define POWER_LOSS_RETRACT_LEN 10 // (mm) Length of filament to retract on fail. Requires backup power.
 
     // Without a POWER_LOSS_PIN the following option helps reduce wear on the SD card,
     // especially with "vase mode" printing. Set too high and vases cannot be continued.
@@ -3845,12 +3845,12 @@
  * Host Prompt Support enables Marlin to use the host for user prompts so
  * filament runout and other processes can be managed from the host side.
  */
-//#define HOST_ACTION_COMMANDS
+#define HOST_ACTION_COMMANDS
 #if ENABLED(HOST_ACTION_COMMANDS)
   //#define HOST_PAUSE_M76                // Tell the host to pause in response to M76
-  //#define HOST_PROMPT_SUPPORT           // Initiate host prompts to get user feedback
+  #define HOST_PROMPT_SUPPORT           // Initiate host prompts to get user feedback
   #if ENABLED(HOST_PROMPT_SUPPORT)
-    //#define HOST_STATUS_NOTIFICATIONS   // Send some status messages to the host as notifications
+    #define HOST_STATUS_NOTIFICATIONS   // Send some status messages to the host as notifications
   #endif
   //#define HOST_START_MENU_ITEM          // Add a menu item that tells the host to start
   //#define HOST_SHUTDOWN_MENU_ITEM       // Add a menu item that tells the host to shut down
@@ -3863,7 +3863,7 @@
  *
  * Implement M486 to allow Marlin to skip objects
  */
-//#define CANCEL_OBJECTS
+#define CANCEL_OBJECTS
 #if ENABLED(CANCEL_OBJECTS)
   #define CANCEL_OBJECTS_REPORTING // Emit the current object as a status message
 #endif
@@ -4218,7 +4218,7 @@
 //
 // M43 - display pin status, toggle pins, watch pins, watch endstops & toggle LED, test servo probe
 //
-//#define PINS_DEBUGGING
+#define PINS_DEBUGGING
 
 // Enable Tests that will run at startup and produce a report
 //#define MARLIN_TEST_BUILD

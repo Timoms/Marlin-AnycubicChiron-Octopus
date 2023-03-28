@@ -213,7 +213,6 @@
 #define E2_DIR_PIN                          PE3
 #define E2_ENABLE_PIN                       PD4
 #ifndef E2_CS_PIN
-
   #define E2_CS_PIN                         PE1
 #endif
 
@@ -235,9 +234,9 @@
 //
 // Heaters / Fans
 //
-#define HEATER_BED_PIN                      PA1   // Hotbed
+#define HEATER_BED_PIN                      PA3   // Hotbed // was PA1 (heater 1)
 #define HEATER_0_PIN                        PA2   // Heater0
-#define HEATER_1_PIN                        PA3   // Heater1
+#define HEATER_1_PIN                        PA1   // Heater1 // Was PA3 (now heatbed connector!!!)
 #define HEATER_2_PIN                        PB10  // Heater2
 #define HEATER_3_PIN                        PB11  // Heater3
 

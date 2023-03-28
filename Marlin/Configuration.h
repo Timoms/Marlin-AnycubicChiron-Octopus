@@ -122,7 +122,7 @@
  * :[-2, -1, 0, 1, 2, 3, 4, 5, 6, 7]
  */
 #define SERIAL_PORT_2 -1
-//#define BAUDRATE_2 250000   // :[2400, 9600, 19200, 38400, 57600, 115200, 250000, 500000, 1000000] Enable to override BAUDRATE
+#define BAUDRATE_3 115200   // :[2400, 9600, 19200, 38400, 57600, 115200, 250000, 500000, 1000000] Enable to override BAUDRATE
 
 /**
  * Select a third serial port on the board to use for communication with the host.
@@ -130,7 +130,7 @@
  * :[-1, 0, 1, 2, 3, 4, 5, 6, 7]
  */
 #define SERIAL_PORT_3 2 //config:CHANGED
-//#define BAUDRATE_3 250000   // :[2400, 9600, 19200, 38400, 57600, 115200, 250000, 500000, 1000000] Enable to override BAUDRATE
+#define BAUDRATE_3 115200   // :[2400, 9600, 19200, 38400, 57600, 115200, 250000, 500000, 1000000] Enable to override BAUDRATE
 
 // Enable the Bluetooth serial interface on AT90USB devices
 //#define BLUETOOTH
@@ -140,7 +140,7 @@
 
 // Printer's unique ID, used by some programs to differentiate between machines.
 // Choose your own or use a service like https://www.uuidgenerator.net/version4
-//#define MACHINE_UUID "00000000-0000-0000-0000-000000000000"
+#define MACHINE_UUID "4e1a7da8-64d5-4b9c-8697-c2d9f2a34054"
 
 // @section stepper drivers
 
@@ -402,17 +402,17 @@
  * Enable and connect the power supply to the PS_ON_PIN.
  * Specify whether the power supply is active HIGH or active LOW.
  */
-//#define PSU_CONTROL
-//#define PSU_NAME "Power Supply"
+#define PSU_CONTROL //config:CHANGED
+#define PSU_NAME "Power Supply" //config:CHANGED
 
-#if ENABLED(PSU_CONTROL)
+#if ENABLED(PSU_CONTROL) //config:CHANGED
   //#define MKS_PWC                 // Using the MKS PWC add-on
   //#define PS_OFF_CONFIRM          // Confirm dialog when power off
-  //#define PS_OFF_SOUND            // Beep 1s when power off
-  #define PSU_ACTIVE_STATE LOW      // Set 'LOW' for ATX, 'HIGH' for X-Box
+  #define PS_OFF_SOUND            // Beep 1s when power off
+  #define PSU_ACTIVE_STATE HIGH      // Set 'LOW' for ATX, 'HIGH' for X-Box
 
   //#define PSU_DEFAULT_OFF               // Keep power off until enabled directly with M80
-  //#define PSU_POWERUP_DELAY      250    // (ms) Delay for the PSU to warm up to full power
+  #define PSU_POWERUP_DELAY      250    // (ms) Delay for the PSU to warm up to full power
   //#define LED_POWEROFF_TIMEOUT 10000    // (ms) Turn off LEDs after power-off, with this amount of delay
 
   //#define POWER_OFF_TIMER               // Enable M81 D<seconds> to power off after a delay
@@ -422,15 +422,15 @@
   //#define PSU_POWEROFF_GCODE "M355 S0"  // G-code to run before power-off (e.g., case light off)
 
   //#define AUTO_POWER_CONTROL      // Enable automatic control of the PS_ON pin
-  #if ENABLED(AUTO_POWER_CONTROL)
-    #define AUTO_POWER_FANS         // Turn on PSU if fans need power
-    #define AUTO_POWER_E_FANS
-    #define AUTO_POWER_CONTROLLERFAN
-    #define AUTO_POWER_CHAMBER_FAN
-    #define AUTO_POWER_COOLER_FAN
-    #define POWER_TIMEOUT              30 // (s) Turn off power if the machine is idle for this duration
+  //#if ENABLED(AUTO_POWER_CONTROL)
+    //#define AUTO_POWER_FANS         // Turn on PSU if fans need power
+    //#define AUTO_POWER_E_FANS
+    //#define AUTO_POWER_CONTROLLERFAN
+    //#define AUTO_POWER_CHAMBER_FAN
+    //#define AUTO_POWER_COOLER_FAN
+    //#define POWER_TIMEOUT              30 // (s) Turn off power if the machine is idle for this duration
     //#define POWER_OFF_DELAY          60 // (s) Delay of poweroff after M81 command. Useful to let fans run for extra time.
-  #endif
+  //#endif
   #if EITHER(AUTO_POWER_CONTROL, POWER_OFF_WAIT_FOR_COOLDOWN)
     //#define AUTO_POWER_E_TEMP        50 // (°C) PSU on if any extruder is over this temperature
     //#define AUTO_POWER_CHAMBER_TEMP  30 // (°C) PSU on if the chamber is over this temperature
@@ -737,7 +737,7 @@
  * the issues involved, don't use bed PID until someone else verifies that your hardware works.
  * @section bed temp
  */
-#define PIDTEMPBED //config:CHANGED
+// #define PIDTEMPBED //config:CHANGED
 
 //#define BED_LIMIT_SWITCHING
 
@@ -1035,17 +1035,18 @@
 // Specify here all the endstop connectors that are connected to any endstop or probe.
 // Almost all printers will be using one per axis. Probes will use one or more of the
 // extra connectors. Leave undefined any used for non-endstop and non-probe purposes.
-#define USE_XMIN_PLUG
-#define USE_YMIN_PLUG
-#define USE_ZMIN_PLUG
+#define USE_XMIN_PLUG //config:CHANGED
+// #define USE_YMIN_PLUG //config:CHANGED
+#define USE_ZMIN_PLUG //config:CHANGED
+//#define USE_Z2MIN_PLUG //config:CHANGED
 //#define USE_IMIN_PLUG
 //#define USE_JMIN_PLUG
 //#define USE_KMIN_PLUG
 //#define USE_UMIN_PLUG
 //#define USE_VMIN_PLUG
 //#define USE_WMIN_PLUG
-#define USE_XMAX_PLUG //config:CHANGED
-//#define USE_YMAX_PLUG
+//#define USE_XMAX_PLUG //config:CHANGED Reason: Used for Z2 Axis
+#define USE_YMAX_PLUG //config:CHANGED
 #define USE_ZMAX_PLUG //config:CHANGED
 //#define USE_IMAX_PLUG
 //#define USE_JMAX_PLUG
@@ -1277,7 +1278,7 @@
  * The probe replaces the Z-MIN endstop and is used for Z homing.
  * (Automatically enables USE_PROBE_FOR_Z_HOMING.)
  */
-#define Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN
+// #define Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN  //config:CHANGED
 
 // Force the use of the probe for Z-axis homing
 //#define USE_PROBE_FOR_Z_HOMING
@@ -1643,8 +1644,8 @@
 // @section motion
 
 // Invert the stepper direction. Change (or reverse the motor connector) if an axis goes the wrong way.
-#define INVERT_X_DIR false //config:CHANGED
-#define INVERT_Y_DIR false //config:CHANGED
+#define INVERT_X_DIR true //config:CHANGED
+#define INVERT_Y_DIR true //config:CHANGED
 #define INVERT_Z_DIR false //config:CHANGED
 //#define INVERT_I_DIR false
 //#define INVERT_J_DIR false
@@ -1681,11 +1682,11 @@
                                   // Be sure to have this much clearance over your Z_MAX_POS to prevent grinding.
 
 //#define Z_AFTER_HOMING  10      // (mm) Height to move to after homing Z
-
+#define ENDSTOP_BEEP //config:CHANGED
 // Direction of endstops when homing; 1=MAX, -1=MIN
 // :[-1,1]
 #define X_HOME_DIR -1 //config:CHANGED
-#define Y_HOME_DIR -1 //config:CHANGED
+#define Y_HOME_DIR 1 //config:CHANGED
 #define Z_HOME_DIR -1 //config:CHANGED
 //#define I_HOME_DIR -1
 //#define J_HOME_DIR -1
@@ -2184,8 +2185,8 @@
 #define EEPROM_CHITCHAT       // Give feedback on EEPROM commands. Disable to save PROGMEM.
 #define EEPROM_BOOT_SILENT    // Keep M503 quiet and only give errors during first load
 #if ENABLED(EEPROM_SETTINGS)
-  //#define EEPROM_AUTO_INIT  // Init EEPROM automatically on any errors.
-  #define EEPROM_INIT_NOW //config:CHANGED   // Init EEPROM on first boot after a new build.
+  //#define EEPROM_AUTO_INIT //config:CHANGED  // Init EEPROM automatically on any errors.
+  //#define EEPROM_INIT_NOW //config:CHANGED   // Init EEPROM on first boot after a new build.
 #endif
 
 // @section host
